@@ -7,14 +7,39 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
 
-  <body>
-    <div class="contenedor">
+  <body id="body">
+    
+    <div class="contenedor" id="contenedor">
       <h1>Convertidor de texto a SQL</h1>
+      <p>Incluya los datos en formato txt para generar las consultas SQL en Oracle</p>
       <div contenteditable="true" class="editable-text">
         <input type="file" id="file" accept=".txt"/>
       </div>
       <button id="BotonConvertir">Convertir</button>
     </div>
+
+    <div id="buttonDownload">
+      <h2>¡Archivos generados!</h2>
+      <div class="downloadButtons">
+        <div id="InsertsDownload">
+          <img src="./images/descargar.png" alt="">
+          <a href="#">Descargar Inserts</a>
+        </div>
+        <div id="UsersDownload">
+          <img src="./images/descargar.png" alt="">
+          <a href="#" id="InsertsDownload">Descargar Usuarios</a>
+        </div>
+    
+      </div>
+      <p class="textRestore">
+        ¿Generaste muchos usuarios que no puedes borrar?  
+        <a href="#" id="restoreDownload">Descarga y ejecuta este codigo en Oracle</a></p>
+      <div class="returnDiv">
+        <a href="#" id="returnButton">Regresar</a>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <script src="./Js/main.js"></script>
+
   </body>
 </html>

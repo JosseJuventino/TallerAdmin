@@ -59,4 +59,64 @@ body {
     overflow: auto; /* Permite el desplazamiento vertical cuando el contenido supera la altura */
   }
   
+header{
+  width: 100%;
+  background-color: #005580;
+}
+#buttonDownload{
+  display: none;
+}
+.downloadButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 
+#buttonDownload h2{
+  color: white;
+  text-align: center;
+}
+
+.downloadButtons div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  background-color: rgb(211, 211, 211);
+  padding: 40px 30px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  
+}
+.textRestore{
+  color: white;
+}
+
+.textRestore a{
+  color: white;
+}
+
+.downloadButtons div a{
+  color: rgb(87, 87, 87);
+  text-decoration: none;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.returnDiv{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+a#returnButton{
+  background-color: #005580;
+ text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+  margin-top: 20px;
+}
