@@ -11,7 +11,7 @@ Este proyecto es parte del taller de administración de bases de datos. Proporci
 
 Para utilizar este proyecto, sigue estos pasos:
 
-1. Visita la página del proyecto: https://mail.google.com/mail/u/1/#inbox?projector=1
+1. Visita la página del proyecto: https://mail.google.com/mail/u/1/#inbox?projector=1](https://jossejuventino.github.io/TallerAdmin/
 2. Sigue las instrucciones proporcionadas en la página para generar tus archivos SQL y añadir contraseñas.
 
 ¡Gracias por su interes! 😀
