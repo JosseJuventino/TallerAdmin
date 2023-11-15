@@ -1,24 +1,26 @@
 
 let BotonConvertir = document.getElementById("BotonConvertir");
-let arrayPersonas = [];
 
-let jsConfetti = new JSConfetti();
-
-
+//Variables para interfaz
 let contenedorPage = document.getElementById("contenedor");
 let buttonDownloadSection = document.getElementById("buttonDownload"); 
 
-let InsertsDownloadButton = document.getElementById("InsertsDownload");
-let UsersDownloadButton = document.getElementById("UsersDownload");
-let restoreDownloadButton = document.getElementById("restoreDownload");
-let returnButton = document.getElementById("returnButton");
-
+//Evento del boton
 BotonConvertir.addEventListener("click", function () {
     /** Acá se ejecuta cuando se da click a ejecutar */
     LeerArchivo();
     contenedorPage.style.display = "none";
     buttonDownloadSection.style.display = "block";
 });
+
+
+let jsConfetti = new JSConfetti();
+
+let arrayPersonas = [];
+let InsertsDownloadButton = document.getElementById("InsertsDownload");
+let UsersDownloadButton = document.getElementById("UsersDownload");
+let restoreDownloadButton = document.getElementById("restoreDownload");
+let returnButton = document.getElementById("returnButton");
 
 function LeerArchivo() {
     let archivo = document.getElementById("file").files[0];
@@ -72,19 +74,24 @@ function CreandoSentenciaSQL(array) {
     //Recorriendo el archivo
     for (let i = 0; i < array.length; i++) {
         if (array[i].tipo == "Estudiante") {
-            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)} DEFAULT TABLESPACE t_estudiantes TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON t_estudiantes;\n`;
-            sqlSentence += `INSERT INTO ESTUDIANTE (nombre, carnet, correo) VALUES ('${array[i].nombre}', '${array[i].carnet}', '${array[i].correo}');\n`;
+            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)}
+                DEFAULT TABLESPACE t_estudiantes 
+                TEMPORARY TABLESPACE temp 
+                QUOTA UNLIMITED ON t_estudiantes;\n
+                GRANT estudiante to U_${array[i].carnet};\n\n`;
+            sqlSentence += `INSERT INTO ESTUDIANTE (nombre, carnet, correo) 
+            VALUES ('${array[i].nombre}', '${array[i].carnet}', '${array[i].correo}');\n`;
             sqlDeleteUser += `DROP USER U_${array[i].carnet};\n`;
         } else if (array[i].tipo == "Docente") {
-            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)} DEFAULT TABLESPACE t_empleados TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON t_empleados;\n`;
+            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)} DEFAULT TABLESPACE t_empleados TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON t_empleados;\nGRANT docente to U_${array[i].carnet};\n\n`;
             sqlSentence += `INSERT INTO EMPLEADO (nombre, id_tipo_empleado, carnet, correo) VALUES ('${array[i].nombre}', 2 , '${array[i].carnet}', '${array[i].correo}');\n`;
             sqlDeleteUser += `DROP USER U_${array[i].carnet};\n`;
         } else if (array[i].tipo == "Administrativo") {
-            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)} DEFAULT TABLESPACE t_empleados TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON t_empleados;\n`;
+            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)} DEFAULT TABLESPACE t_empleados TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON t_empleados;\nGRANT administrativo to U_${array[i].carnet};\n\n`;
             sqlSentence += `INSERT INTO EMPLEADO (nombre, id_tipo_empleado, carnet, correo) VALUES ('${array[i].nombre}', 0 , '${array[i].carnet}', '${array[i].correo}');\n`;
             sqlDeleteUser += `DROP USER U_${array[i].carnet};\n`;
         } else if (array[i].tipo == "Coordinador") {
-            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)} DEFAULT TABLESPACE t_empleados TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON t_empleados;\n`;
+            sqlUser += `CREATE USER U_${array[i].carnet} IDENTIFIED BY ${generarContrasena(10)} DEFAULT TABLESPACE t_empleados TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON t_empleados;\nGRANT coordinador to U_${array[i].carnet};\n\n`;
             sqlSentence += `INSERT INTO EMPLEADO (nombre, id_tipo_empleado, carnet, correo) VALUES ('${array[i].nombre}', 1 , '${array[i].carnet}', '${array[i].correo}');\n`;
             sqlDeleteUser += `DROP USER U_${array[i].carnet};\n`;
         }
@@ -104,12 +111,8 @@ function CreandoSentenciaSQL(array) {
     });
 
   
-    jsConfetti.addConfetti({
-        emojis: ['🥵','🔥'],
-     })
+    jsConfetti.addConfetti()
 }
-
-
 
 returnButton.addEventListener("click", function () {
     contenedorPage.style.display = "block";
@@ -133,6 +136,5 @@ function generarContrasena(longitud) {
         const indice = Math.floor(Math.random() * caracteres.length);
         contrasena += caracteres.charAt(indice);
     }
-
     return contrasena;
 }
